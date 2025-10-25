@@ -1,16 +1,26 @@
 public class FuncionarioComissionado extends Funcionario{
-    public FuncionarioComissionado(String nome,String turno,String cpf,int identificacao ){
-        super(nome,turno,cpf,identificacao);
+    public FuncionarioComissionado(String nome,String turno,String cpf,int id, Integer totalVendas, double comissao){
+        super(nome,turno,cpf,id);
+        this.totalVendas = totalVendas;
+        this.comissao=comissao;
     }
 
-    public double calcularHorasTrabalhadas(){
-        double salario=horas*valorhora;
-        return salario;
+    public double getTotalVendas(){
+        return totalVendas;
     }
-    public double calcularTotalHoras(){
-        double salario=horas*valorhora;
-        bonus = salario*0.10;
-        salariototal=bonus+salario;
-        return salariototal;
+    public double setTotalVendas(){
+        this.totalVendas=totalVendas;
+    }
+    public double getComissao(){
+        return comissao;
+    }
+
+    public double setComissao(){
+        this.comissao=comissao;
+    }
+    @override
+    public double calcularComissao(){
+        double pagamento=totalVendas*comissao;
+        return pagamento;
     }
 }

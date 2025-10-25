@@ -1,15 +1,15 @@
 package sistemaDePagamento;
-public abstract class Funcionario {
+public abstract class Funcionario implements Pagamento {
     protected String nome;
     protected String turno;
     protected String cpf;
-    protected int identificacao;
+    protected int id;
 
-    public Funcionario(String nome,String turno,String cpf,int identificacao){
+    public Funcionario(String nome,String turno,String cpf,int id){
         this.nome = nome;
         this.turno=turno;
         this.cpf=cpf;
-        this.identificacao=identificacao;
+        this.id=id;
     }
     public abstract double calcularHorasTrabalhadas();
     public abstract double calcularTotalHoras();
@@ -17,9 +17,11 @@ public abstract class Funcionario {
     public abstract double pagamento();
     public abstract double calcularSalario();
     public abstract double calcularBonus();
+    public abstract double calcularSalarioBonus();
+    public abstract double calcularPagamaento();
 
-    public void exibir(){
-        Sistem.out.println("Conta");
+    public String toString(){
+        return "ID: "+id +"Nome: "+nome+"CPF: "+cpf+"turno:"+turno;
     }
 
 
