@@ -1,28 +1,50 @@
+package sistemaDePagamento;
 public class FuncionarioAssalariado extends Funcionario{
-    public FuncionarioAssalariado(string nome, string turno, string cpf, int id,int salario,int bonus){
-        super(nome,turno,cpf,id);
-        this.salario=salario;
-        this.bonus=bonus;
-        }
+    protected double salario;
+    protected double bonus;
+    protected double salariototal;
 
-        public double getSalario(){
-            return salario;
-        }
-        public double setSalario(){
-            this.salario = salario;
-        }
-        public double getBonus(){
-            return Bonus;
-        }
-        public double setBonus(){
-            this.bonus=bonus;
-        }
-        @Override
-        public double calcularSalarioBonus(){
-            bonus = salario*0.10;
-            salariototal=bonus+salario;
-            return salariototal;
-        }
+    public FuncionarioAssalariado(String nome, String turno, String cpf, int id, double salario, double bonus){
+        super(nome,turno,cpf,id);
+        this.salario = salario;
+        this.bonus = bonus;
+    }
+
+    public double getSalario(){
+        return salario;
+    }
+    public void setSalario(double salario){
+        this.salario = salario;
+    }
+    public double getBonus(){
+        return bonus;
+    }
+    public void setBonus(double bonus){
+        this.bonus = bonus;
+    }
+
+    @Override
+    public double calcularSalario(){
+        return salario;
+    }
+
+    @Override
+    public double calcularBonus(){
+        
+        return bonus;
+    }
+
+    @Override
+    public double calcularSalarioBonus(){
+        bonus = calcularBonus();
+        salariototal = bonus + salario;
+        return salariototal;
+    }
+
+    @Override
+    public double calcularPagamento(){
+        return calcularSalarioBonus();
+    }
 
 
     
