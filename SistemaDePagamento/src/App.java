@@ -15,14 +15,46 @@ public class App {
             funcionarios.add(new FuncionarioAssalariado("Pedro", "Noite", "33344455566", 3, 3000.0, 200.0));
         } else {
            
-            char opcao;
+            char opcao = 'n';
             do {
                 System.out.println("\nSelecione o tipo de funcionario");
                 System.out.println("1 - Horista");
                 System.out.println("2 - Comissionado");
                 System.out.println("3 - Assalariado");
+                System.out.println("4 - Listar funcionarios cadastrados");
                 System.out.print("opcao: ");
                 int tipo = Integer.parseInt(sc.nextLine().trim());
+
+                
+                if (tipo == 4) {
+                    System.out.println("\n--- Funcionarios cadastrados ---");
+                    if (funcionarios.isEmpty()) {
+                        System.out.println("Nenhum funcionario cadastrado.");
+                    } else {
+                        int idx = 1;
+                        for (Funcionario f : funcionarios) {
+                            System.out.println("[" + idx++ + "] " + f.getClass().getSimpleName() + " - " + f.getNome() + " | CPF: " + f.getCpf() + " | Turno: " + f.getTurno());
+                        }
+                    }
+                   
+                    System.out.print("\nDeseja voltar ao menu principal? (s/n): ");
+                    String resp = sc.nextLine().trim();
+                    if (resp.isEmpty() || resp.charAt(0) == 'n' || resp.charAt(0) == 'N') {
+                        
+                        System.out.print("\nDeseja gerar o relatorio final agora? (s/n): ");
+                        String gerar = sc.nextLine().trim();
+                        if (gerar.isEmpty() || gerar.charAt(0) == 'n' || gerar.charAt(0) == 'N') {
+                           
+                            break;
+                        } else {
+                            
+                            break;
+                        }
+                    } else {
+                       
+                        continue;
+                    }
+                }
 
                 System.out.print("Nome: ");
                 String nome = sc.nextLine();
@@ -63,25 +95,30 @@ public class App {
                 }
 
                 System.out.print("\nDeseja cadastrar outro funcionario? (s/n): ");
-                opcao = sc.nextLine().trim().isEmpty() ? 'n' : sc.nextLine().trim().charAt(0);
+                String resposta = sc.nextLine().trim();
+                opcao = (resposta.isEmpty() ? 'n' : resposta.charAt(0));
             } while (opcao == 's' || opcao == 'S');
         }
 
       
         System.out.println("\n===== Pagamentos =====");
-        double total = 0.0;
-        Funcionario maior = null;
-        for (Funcionario f : funcionarios) {
-            double pagamento = f.calcularPagamento();
-            System.out.println(f + " | Pagamento: R$ " + pagamento);
-            total += pagamento;
-            if (maior == null || pagamento > maior.calcularPagamento()) {
-                maior = f;
+        if (funcionarios.isEmpty()) {
+            System.out.println("Nenhum funcionario cadastrado.");
+        } else {
+            double total = 0.0;
+            Funcionario maior = null;
+            for (Funcionario f : funcionarios) {
+                double pagamento = f.calcularPagamento();
+                System.out.println(f + " | Pagamento: R$ " + pagamento);
+                total += pagamento;
+                if (maior == null || pagamento > maior.calcularPagamento()) {
+                    maior = f;
+                }
             }
-        }
-        System.out.println("\nTotal pago pela empresa: R$ " + total);
-        if (maior != null) {
-            System.out.println("Maior pagamento: " + maior.getNome() + " (R$ " + maior.calcularPagamento() + ")");
+            System.out.println("\nTotal pago pela empresa: R$ " + total);
+            if (maior != null) {
+                System.out.println("Maior pagamento: " + maior.getNome() + " (R$ " + maior.calcularPagamento() + ")");
+            }
         }
         sc.close();
     }
